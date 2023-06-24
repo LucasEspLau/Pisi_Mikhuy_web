@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" th:href="@{/css/styleGeneral.css}">
+<link rel="stylesheet" th:href="@{/css/styleInicio.css}">
+<link rel="stylesheet" th:href="@{/css/StyleHover.css}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Grandstander:wght@800&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<title th:text="${titulo}"></title>
+</head>
+<body>
+<body>
+	<header class="cabeza fixed-top ">
+		<nav class="navbar  navbar-expand-lg ">
+			<div class="container-fluid">
+				<a class="navbar-brand" th:href="@{/index}"> 
+				<img class="logo_PisiM" src="/images/imagesInicio/LOGO PNG.png">
+				</a>
+				<a class="navText" style="text-decoration:none"th:href="@{/index}">Pisi Mikhuy</a>
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+					aria-controls="navbarNavAltMarkup" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+					<div class="navbar-nav navSub">
+						<a class="nav-link" aria-current="page" th:href="@{/index}">INICIO</a>
+						<div th:if="${clienteI != null}">
+							<a class="nav-link " th:href="@{/catalogo}">CATALOGO</a>
+						</div>
+						<a class=" nav-link " th:href="@{/preguntas}">PREGUNTAS FRECUENTES</a>
+						<div th:if="${adminI != null}">
+							<a class="nav-link " th:href="@{/listar}">LISTA USUARIOS</a>
+						</div>
+						<div th:if="${clienteI != null && contaI==1}">
+							<a class="nav-link " th:href="@{/premio}">PREMIO</a>
+						</div>
+						<div th:if="${adminI != null}">
+							<a class="nav-link " th:href="@{/platos}">PLATOS</a>
+						</div>
+						<div th:if="${clienteI == null && adminI==null}" >
+						<div class="reg">
+							<div class="btn-group" aria-label="Button group with nested dropdown" >
+  								<div class="btn-group" role="group"  th:href="@{/registro}">
+    							<a th:href="@{/registro}"><button type="button" class="btn btn-warning" >
+      								REGISTRARSE
+    							</button>
+    							</a>
+  								</div>
+							</div>
+							<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+  								<div class="btn-group" role="group">
+    							<button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+      								INICIAR SESIÓN
+    							</button>
+    							<ul class="dropdown-menu">
+      							<li><a class="dropdown-item" th:href="@{/iniSesion}">USUARIO</a></li>
+      							<li><a class="dropdown-item" th:href="@{/iniSesionAdm}">ADMINISTRADOR</a></li>
+    							</ul>
+  								</div>
+							</div>
+						</div>
+						</div>
+						<div th:if="${clienteI != null}">
+						
+							<div class="reg">
+							
+								<div class="btn-group" role="group" aria-label="Button group with nested dropdown" >
+	  								<div class="btn-group" role="group">
+	    							<button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+	      								USUARIO
+	    							</button>
+	    							<ul class="dropdown-menu">
+	      							<li><a class="dropdown-item" th:href="@{/cerrarSesion}">CERRAR SESION</a></li>
+	    							</ul>
+	  								</div>
+								</div>
+							</div>
+						</div>
+						
+						<div th:if="${adminI != null}">
+						
+							<div class="reg">
+								<div class="btn-group" role="group" aria-label="Button group with nested dropdown" >
+	  								<div class="btn-group" role="group">
+	    							<button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+	      								ADMINISTRADOR
+	    							</button>
+	    							<ul class="dropdown-menu">
+	      							<li><a class="dropdown-item" th:href="@{/cerrarSesion}">CERRAR SESION</a></li>
+
+	    							</ul>
+	  								</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</header>
+	
+		<div class="container">
+	<div class="sm-6">
+	<h1 class="tex" th:text="${plato.nomPla}"></h1>
+	<table>
+	<td>
+		<th>
+			<figure class="figure">
+  <img th:src="@{${plato.imagen}}" class="imagen" alt="cuyChactado">
+  </figure>
+								</th>
+    </td>
+
+	<td>
+		<th>
+		<div class="card">
+  		<div class="card-header" th:text="${plato.nomPla}">
+
+  		</div>
+  <div class="card-body">
+    <h5 class="card-title"></h5>
+    <p class="card-text" th:text="${plato.descripcion}"></p>
+    <p class="card-text"  th:text="'PRECIO: s/.'+${plato.precio}"></p>
+    	<form th:action="@{'/catalogo/'+${cliente.id}+'/'+ ${plato.id}+'/'+ ${carrito.id}}" th:object=${itemC} method="post">
+			<div class="mb-3">
+		    	<label for="exampleInputEmail1" class="form-label">CANTIDAD:</label>
+		    	<input type="text" th:field="*{cantidad}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
+		  	</div>
+			<div class="boton">
+			 <button type="submit" value="Registrar Usuario" name="btnRegistrar" class="btn btn-primary">COMPRAR</button>
+			<a th:href="@{'/carrito/'+${cliente.id}+'/'+ ${carrito.id}}" class="btn btn-primary">IR CARRITO</a>
+			</div>
+			</form>
+    
+    </div>
+  </div>
+  
+		</th>
+		
+	</td>
+	
+	</table>
+</div>
+
+
+</div>
+<br></br>
+
+	
+
+	<div class="container">
+	  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+	    <div class="col-md-4 d-flex align-items-center">
+	      <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+	      	<img class="bi" width="30" height="24" src="/images/imagesInicio/LOGO PNG.png">
+	      </a>
+	      <span class="text-muted">Todos los derechos reservados, ©Pisi Mikhuy 2023</span>
+	    </div>
+	
+	    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+	      <li class="ms-3"><a class="text-muted ms-3" href="#"><img class="bi" width="30" height="30" src="/images/imagesInicio/fac.png"></a></li>
+	      <li class="ms-3"><a class="text-muted ms-3" href="https://instagram.com/pisi_mikhuy?igshid=YmMyMTA2M2Y="><img class="bi" width="30" height="30" src="/images/imagesInicio/ig.png"></a></li>
+	      <li class="ms-3"><a class="text-muted ms-3" href="#"><img class="bi" width="30" height="30" src="/images/imagesInicio/yt.png"></a></li>
+	    </ul>
+	  </footer>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+		integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+		integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+		crossorigin="anonymous"></script>
+</body>
+</html>

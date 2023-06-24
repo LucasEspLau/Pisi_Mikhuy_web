@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+</head>
+<body>
+<h1 class="card-header" th:text="${titulo}"></h1>
+	
+	<div class="container py-4">
+		<div class="card bg-light">
+			
+			<div class="card-body">
+				
+				<ul class="list-group">
+					<li class="list-group-item" th:text="${cliente.iden}"></li>
+					<li class="list-group-item" th:text="${cliente.nom}"></li>
+					<li class="list-group-item" th:text="${cliente.apePa}"></li>
+					<li class="list-group-item" th:text="${cliente.apeMa}"></li>
+					<li class="list-group-item" th:text="${cliente.correo}"></li>
+					<li class="list-group-item" th:text="${cliente.fecCre}"></li>
+				</ul>
+			
+			<table class="table table-bordered table-spriped my-4">
+				<thead class="thead-inverse">
+					<tr>
+						<th>Id Carrito</th>
+						<th>Cantidad total de productos</th>
+						<th>Total</th>
+						<th>Descuento</th>
+						<th>Total con descuento</th>
+					</tr>
+				</thead>
+				
+				
+				<tbody>
+					<tr th:each="carrito: ${cliente.carritos}">
+						<td th:text="${carrito.id}"></td>
+						<td th:text="${carrito.cant}"></td>
+						<td th:text="${carrito.pago}"></td>
+						<td th:text="${carrito.totDes}"></td>
+						<td th:text="${carrito.precioF}"></td>
+					</tr>
+
+				</tbody>
+			</table>
+			<form th:href="@{'/carrito/'+${cliente.id}+'/'+ ${carrito.id}}" method="post">
+			<button type="submit" class="btn btn-primary">
+				<i class="fas fa-sign-in-alt"></i> PAGAR
+			</button>
+			</form>
+			<br></br>
+			<table class="table table-bordered table-spriped my-4">
+				<thead class="thead-inverse">
+					<tr>
+						<th>Id Items</th>
+						<th>Nombre del Producto</th>
+						<th>Cantidad</th>
+						<th>Total</th>
+					</tr>
+				</thead>
+				
+				
+				<tbody>
+					<tr th:each="items: ${items}">
+						<td th:text="${items.id}"></td>
+						<td th:text="${items.plato.nomPla}"></td>
+						<td th:text="${items.cantidad}"></td>
+						<td th:text="${items.totalPlato}"></td>
+					</tr>
+				</tbody>
+			</table>
+			
+			</div>
+		</div>
+	</div>
+	
+	
+	<footer></footer>
+</body>
+</html>

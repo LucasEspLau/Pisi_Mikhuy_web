@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" th:href="@{css/styleGeneral.css}">
+<link rel="stylesheet" th:href="@{css/styleUsuario.css}">
+<link rel="stylesheet" th:href="@{css/StyleHover.css}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<title>Usuario</title>
+</head>
+<body>
+	<header class="cabeza fixed-top ">
+		<nav class="navbar  navbar-expand-lg ">
+			<div class="container-fluid">
+				<a class="navbar-brand" th:href="@{/index}"> 
+				<img class="logo_PisiM" src="images/imagesInicio/LOGO PNG.png">
+				</a>
+				<a class="navText" style="text-decoration:none"th:href="@{/index}">Pisi Mikhuy</a>
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+					aria-controls="navbarNavAltMarkup" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+					<div class="navbar-nav navSub">
+						<a class="nav-link" aria-current="page" th:href="@{/index}">INICIO</a>
+						<div th:if="${clienteI != null}">
+							<a class="nav-link " th:href="@{/catalogo}">CATOLOGO</a>
+						</div>
+						<a class=" nav-link " th:href="@{/preguntas}">PREGUNTAS FRECUENTES</a>
+						<div th:if="${adminI != null}">
+							<a class="nav-link " th:href="@{/listar}">LISTA USUARIOS</a>
+						</div>
+						<div th:if="${clienteI != null}">
+							<a class="nav-link " th:href="@{/premio}">PREMIO</a>
+						</div>
+						<div th:if="${adminI != null}">
+							<a class="nav-link " th:href="@{/platos}">PLATOS</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</header>
+	
+
+	<!-- Page Content -->
+	<div class="container">
+
+
+		<!-- Page Heading/Breadcrumbs -->
+		<h1 class="mt-4 mb-3">
+			PisiMikhuy <small>Platos</small>
+		</h1>
+	
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+			<li class="breadcrumb-item active">Ver Platos</li>
+		</ol>
+
+		
+		<h2>Gestion de platos</h2>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">Id</th>
+					<th scope="col">Nombre</th>
+					<th scope="col">Descripción</th>
+					<th scope="col">Precio</th>
+					<th scope="col">Editar</th>
+					<th scope="col">Eliminar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="p:${platos}">
+					<td th:text="${p.id}"></td>
+					<td th:text="${p.nomPla}"></td>
+					<td th:text="${p.descripcion}"></td>
+					<td th:text="${p.precio}"></td>
+					<td><a class="btn btn-info" th:href="@{/platos/edit/{id} (id=${p.id})}">Editar</a></td>
+					<td><a class="btn btn-danger" th:href="@{/platos/delete/{id} (id=${p.id})}">Eliminar</a></td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+	<!-- /.container -->
+	
+	<div class="container">
+	  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+	    <div class="col-md-4 d-flex align-items-center">
+	      <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+	      	<img class="bi" width="30" height="24" src="images/imagesInicio/LOGO PNG.png">
+	      </a>
+	      <span class="text-muted">Todos los derechos reservados, ©Pisi Mikhuy 2023</span>
+	    </div>
+	
+	    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+	      <li class="ms-3"><a class="text-muted ms-3" href="#"><img class="bi" width="30" height="30" src="images/imagesInicio/fac.png"></a></li>
+	      <li class="ms-3"><a class="text-muted ms-3" href="https://instagram.com/pisi_mikhuy?igshid=YmMyMTA2M2Y="><img class="bi" width="30" height="30" src="images/imagesInicio/ig.png"></a></li>
+	      <li class="ms-3"><a class="text-muted ms-3" href="#"><img class="bi" width="30" height="30" src="images/imagesInicio/yt.png"></a></li>
+	    </ul>
+	  </footer>
+	</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+</body>
+</html>

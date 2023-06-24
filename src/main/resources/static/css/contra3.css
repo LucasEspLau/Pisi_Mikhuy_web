@@ -1,0 +1,166 @@
+@charset "ISO-8859-1";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+.cabeza{
+	background-color: #FFE6A7;
+/*#FFE6A7
+*/
+}
+.divBody{
+	padding-top:110px;
+	background-color:#fafbfd;
+	
+}
+.letraCar{
+	font-family: 'Grandstander', cursive;
+}
+.logo_PisiM{
+	display: flex;
+    height: 80px;
+    margin-left: 20px;
+}
+.navText{
+	text-decoration:none;
+	margin: 20px 0px;
+    font-size: 32px;
+    font-family: 'Playfair Display', serif;    
+    color:black;
+}
+.navSub{
+	margin-left:50px;
+	position:relative;
+    font-family: 'Playfair Display', serif;    
+    color:black;
+    font-size:20px
+    
+}
+.reg{
+	width: auto;
+	
+	
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+body{
+    
+    justify-content: center;
+    align-items: center;
+    background-color: #cacaca;
+    background-size: cover;
+
+    
+}
+body{
+	margin: 0;
+	padding: 0;
+	font-family: montserrat;
+	
+}
+
+.main-section{
+    margin:0 auto;
+    margin-top:10%;
+    padding: 10;
+ 
+}
+.container{
+	position: relative;
+    width: 700px;
+    height: 70px;
+}
+.container-fluid divBody{
+	width: 500px;
+}
+
+.modal-content{
+    background-color: #3b4652;
+    opacity: .85;
+    padding: 10 ;
+    width: 500px;
+    
+    box-shadow: 0px 0px 3px #848484;
+    
+}
+.user-img{
+    margin-top: -30px;
+    margin-bottom: 35px;
+}
+
+.user-img img{
+    width: 100xp;
+    height: 100px;
+    box-shadow: 0px 0px 3px #848484;
+    border-radius: 50%;
+}
+
+.form-group input{
+    height: 42px;
+    font-size: 18px;
+    border:0;
+    padding-left: 54px;
+    border-radius: 5px;
+}
+
+.form-group::before{
+    font-family: "Font Awesome\ 5 Free";
+    position: absolute;
+    left: 28px;
+    font-size: 22px;
+    padding-top:4px;
+    
+}
+
+.form-group#user-group::before{
+    content: "\f007";
+}
+
+.form-group#contrasena-group::before{
+    content: "\f023";
+}
+
+.form-group#cod-group::before{
+    content: "\f2c1";
+}
+.form-group#dni-group::before{
+    content: "\f2c2";
+}
+.form-group#ema-group::before{
+    content: "\f0e0";
+}
+.form-group#birth-group::before{
+    content: "\f1fd";
+}
+
+button{
+    width: 60%;
+    margin: 5px 0 25px;
+    padding-bottom: 10px;
+}
+
+.forgot{
+    padding: 5px 0;
+}
+
+.forgot a{
+    color: white;
+}
+.icon{
+    position: absolute;
+    height: 3%;
+    position: absolute;
+    top: 30%;
+    right: 20px;
+    transform: translateY(1850%);
+   
+    opacity: 0.3;
+    cursor: pointer;
+}
+
+.icon:hover{
+    opacity: 0.8;
+}

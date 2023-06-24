@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script defer th:src="@{js/contra.js}"></script>
+<link rel="stylesheet" th:href="@{/css/contra3.css}">
+<link rel="stylesheet" th:href="@{/css/styleGeneral.css}">
+<link rel="stylesheet" th:href="@{/css/styleInicio.css}">
+<link rel="stylesheet" th:href="@{/css/StyleHover.css}">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+	crossorigin="anonymous">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+<title th:text="${titulo}"></title>
+</head>
+<body>
+	<header class="cabeza fixed-top ">
+		<nav class="navbar  navbar-expand-lg ">
+			<div class="container-fluid">
+				<a class="navbar-brand" th:href="@{/index}"> 
+				<img class="logo_PisiM" src="/images/imagesInicio/LOGO PNG.png">
+				</a>
+				<a class="navText" style="text-decoration:none"th:href="@{/index}">Pisi Mikhuy</a>
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+					aria-controls="navbarNavAltMarkup" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+					<div class="navbar-nav navSub">
+						<a class="nav-link" aria-current="page" th:href="@{/index}">INICIO</a>
+						<div th:if="${clienteI != null}">
+							<a class="nav-link " th:href="@{/catalogo}">CATALOGO</a>
+						</div>
+						<a class=" nav-link " th:href="@{/preguntas}">PREGUNTAS FRECUENTES</a>
+						<div th:if="${adminI != null}">
+							<a class="nav-link " th:href="@{/listar}">LISTA USUARIOS</a>
+						</div>
+						<div th:if="${clienteI != null && contaI==1}">
+							<a class="nav-link " th:href="@{/premio}">PREMIO</a>
+						</div>
+						<div th:if="${adminI != null}">
+							<a class="nav-link " th:href="@{/platos}">PLATOS</a>
+						</div>
+						<div th:if="${clienteI == null && adminI==null}" >
+						<div class="reg">
+							<div class="btn-group" aria-label="Button group with nested dropdown" >
+  								<div class="btn-group" role="group"  th:href="@{/registro}">
+    							<a th:href="@{/registro}"><button type="button" class="btn btn-warning" >
+      								REGISTRARSE
+    							</button>
+    							</a>
+  								</div>
+							</div>
+							<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+  								<div class="btn-group" role="group">
+    							<button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+      								INICIAR SESIÓN
+    							</button>
+    							<ul class="dropdown-menu">
+      							<li><a class="dropdown-item" th:href="@{/iniSesion}">USUARIO</a></li>
+      							<li><a class="dropdown-item" th:href="@{/iniSesionAdm}">ADMINISTRADOR</a></li>
+    							</ul>
+  								</div>
+							</div>
+						</div>
+						</div>
+						<div th:if="${clienteI != null}">
+						
+							<div class="reg">
+							
+								<div class="btn-group" role="group" aria-label="Button group with nested dropdown" >
+	  								<div class="btn-group" role="group">
+	    							<button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+	      								USUARIO
+	    							</button>
+	    							<ul class="dropdown-menu">
+	      							<li><a class="dropdown-item" th:href="@{/cerrarSesion}">CERRAR SESION</a></li>
+	    							</ul>
+	  								</div>
+								</div>
+							</div>
+						</div>
+						
+						<div th:if="${adminI != null}">
+						
+							<div class="reg">
+								<div class="btn-group" role="group" aria-label="Button group with nested dropdown" >
+	  								<div class="btn-group" role="group">
+	    							<button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+	      								ADMINISTRADOR
+	    							</button>
+	    							<ul class="dropdown-menu">
+	      							<li><a class="dropdown-item" th:href="@{/cerrarSesion}">CERRAR SESION</a></li>
+
+	    							</ul>
+	  								</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<div class="formular">
+		<div class="container-fluid divBody">
+			<div class="modal-dialog text-center">
+				<div class="col-sm-8 main-section">
+					<div class="modal-content">
+						<div class="col-12 user-img">
+							<img src="/images/imagesContra/re.png">
+						</div>
+						<h1 class="text-center" th:text="${titulo}"></h1>
+						<br>
+					
+						<form class="col-12" th:action=@{/registro} th:object=${cliente} method="post">
+							
+							
+							
+							
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<label class="input-group-text" for="inputGroupSelect01">ID</label>
+								</div>
+								<select class="custom-select" id="inputGroupSelect01">
+									<option selected>Elija su Documento de Identidad</option>
+									<option  >DNI</option>
+									<option   >CARNE</option>
+									<option  >PASSAPORTE</option>
+								</select>
+								
+							</div>
+							<div class="form-group" id="dni-group">
+								<input type="text" class="form-control"
+									placeholder="Ingrese "
+									th:field="*{iden}" />
+										<small class="form-text text-danger" th:if="${#fields.hasErrors('iden')}"
+								th:errors="*{iden}">
+								</small>
+							</div>
+
+
+							<label></label>
+
+							<div class="form-group" id="user-group">
+								<input type="text" class="form-control"
+									placeholder="Apellido paterno" 
+									th:field="*{apePa}" />
+								<small class="form-text text-danger" th:if="${#fields.hasErrors('apePa')}"
+								th:errors="*{apePa}">
+								</small>	
+							</div>
+							
+							<label></label>
+							<div class="form-group" id="user-group">
+								<input type="text" class="form-control"
+									placeholder="Apellido materno"
+									th:field="*{apeMa}" />
+									<small class="form-text text-danger" th:if="${#fields.hasErrors('apeMa')}"
+								th:errors="*{apeMa}">
+								</small>
+							</div>
+							<label></label>
+							<div class="form-group" id="user-group">
+								<input type="text" class="form-control"
+									placeholder="Nombres"  th:field="*{nom}" />
+									<small class="form-text text-danger" th:if="${#fields.hasErrors('nom')}"
+								th:errors="*{nom}">
+								</small>
+							</div>
+							<label></label>
+							
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<label class="input-group-text" for="inputGroupSelect01">Género</label>
+								</div>
+								<select class="custom-select" id="inputGroupSelect01" th:field="*{genero}">
+				  
+									<option value="">Elija su género</option>
+									<option th:value="Masculino">Masculino</option>
+									<option th:value="Femenino" >Femenimo</option>
+								
+								</select>
+								<br>
+									<small class="form-text text-danger" th:if="${#fields.hasErrors('genero')}"
+								th:errors="*{genero}">
+								</small>
+							</div>
+								<label></label>
+								
+								<div class="form-group" id="birth-group">
+								<input type="text" class="form-control"
+									placeholder="Fecha de nacimiento" 
+									th:field="*{fecNac}" />
+									<small class="form-text text-danger" th:if="${#fields.hasErrors('fecNac')}"
+								th:errors="*{fecNac}">
+								</small>
+									
+								</div>
+							
+							<label></label>
+							<div class="form-group" id="ema-group">
+								<input type="email" class="form-control"
+									placeholder="Ingrese su email" name="username" th:field="*{correo}" />
+									<small class="form-text text-danger" th:if="${#fields.hasErrors('correo')}"
+								th:errors="*{correo}">
+								</small>
+							</div>
+							<label></label>
+							<div class="form-group" id="contrasena-group">
+								<input type="password" class="form-control"
+									placeholder="Contraseña" th:field="*{con}" id="password" /> <img
+									src="images/imagesContra/show.png" class="icon" id="Eye">
+								<div id="icon" onclick="showHide()"></div>
+								<script src="js/contra.js"></script>
+								<small class="form-text text-danger" th:if="${#fields.hasErrors('con')}"
+								th:errors="*{con}">
+								</small>
+							</div>
+							<label></label><br>
+							<button type="submit" class="btn btn-primary">
+								<i class="fas fa-sign-in-alt"></i> Registrarse
+							</button>
+
+						</form>
+
+					</div>
+					<br></br>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="pie">
+	<div class="container">
+
+		<footer
+			class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+			<div class="col-md-4 d-flex align-items-center">
+				<a href="/"
+					class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+					<img class="bi" width="30" height="24"
+					src="images/imagesInicio/LOGO PNG.png">
+				</a> <span class="text-muted">Todos los derechos reservados,
+					©Pisi Mikhuy 2023</span>
+			</div>
+
+			<ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+				<li class="ms-3"><a class="text-muted ms-3" href="#"><img
+						class="bi" width="30" height="30"
+						src="/images/imagesInicio/fac.png"></a></li>
+				<li class="ms-3"><a class="text-muted ms-3"
+					href="https://instagram.com/pisi_mikhuy?igshid=YmMyMTA2M2Y="><img
+						class="bi" width="30" height="30" src="/images/imagesInicio/ig.png"></a></li>
+				<li class="ms-3"><a class="text-muted ms-3" href="#"><img
+						class="bi" width="30" height="30" src="/images/imagesInicio/yt.png"></a></li>
+			</ul>
+		</footer>
+	</div>
+</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+		integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+		integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+		crossorigin="anonymous"></script>
+</body>
+</html>
